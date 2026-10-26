@@ -13,7 +13,6 @@ import { makeSecureId } from '../../../services/make.secure.id';
 import { DashboardFunction } from '../../dashboard.function.decorator';
 import { getSsrfSafeDispatcher } from '../../../dtos/webhooks/ssrf.safe.dispatcher';
 import { ZernioDto } from './zernio.dto';
-
 type Identity = {
   profileId: string;
   accountId: string;
@@ -22,7 +21,6 @@ type Identity = {
 type Pending = Identity & { postId: string };
 const objectId = /^[a-f\d]{24}$/i;
 const videoPath = /\.(mp4|mov|avi|wmv|flv|3gp|webm)(?:\?|$)/i;
-
 export class ZernioProvider extends SocialAbstract implements SocialProvider {
   identifier = 'zernio';
   name = 'Zernio';
@@ -32,11 +30,9 @@ export class ZernioProvider extends SocialAbstract implements SocialProvider {
   isBetweenSteps = false;
   toolTip =
     'YouTube / TikTok. Enter https://zernio.com/profiles/PROFILE_ID?platform=youtube (or tiktok). Check the whole team has room in its two free accounts before connecting.';
-
   maxLength() {
     return 2200;
   }
-
   override async checkValidity(
     posts: Array<{ path: string }[]>,
     settings: ZernioDto
