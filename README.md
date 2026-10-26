@@ -1,3 +1,36 @@
+Modified source for this AGPL fork: [SommaK/postiz-app](https://github.com/SommaK/postiz-app).
+
+This fork adds a Zernio provider for YouTube videos/Shorts and TikTok videos/photos.
+It uses Postiz's existing scheduling, storage, connect state and bounded status polling.
+Configure `ZERNIO_API_KEY` privately on the backend **and orchestrator**, never in frontend
+public variables. In Add channel → Zernio, enter
+`https://zernio.com/profiles/PROFILE_ID?platform=youtube` (or `tiktok`), then finish the
+hosted connect screen in a new tab, then return and continue. The backend verifies the
+completed vendor handoff before attaching its account; browser account IDs are never trusted.
+The URL is an input descriptor for the existing external-instance
+connect form; it contains public identifiers only. Each channel retains its exact profile,
+platform and account. Confirm existing whole-team usage before any future connection:
+[only the first two connected accounts are free](https://docs.zernio.com/pricing).
+
+This source/mocked slice has made no live connection or publication. Text-only posts,
+other platforms, threads, Creator Inbox drafts and ads are unsupported. Media must already
+have a publicly reachable HTTPS URL from Postiz's media library. Postiz submits when due;
+there is no second vendor schedule or early pre-upload. Processing can delay publication.
+Accepted/scheduled/partial responses and early YouTube URLs do not count as published.
+The existing poll ends after 90 checks (20 seconds apart); unresolved posts become an error
+requiring account inspection before reposting. This provider never retries ambiguous create
+responses;
+the existing workflow may retry an activity with no heartbeat. A stable per-channel/post
+idempotency key protects that path (vendor window: 24 hours).
+
+Focused mocked tests use the built-in Node runner and the dependencies already declared in
+`package.json`: `node --test libraries/nestjs-libraries/src/integrations/social/zernio/zernio.test.cjs`.
+If completion is clicked before the hosted connection finishes, restart from Add channel:
+Postiz consumes its existing one-use state at completion. Vendor fast reconnect responses
+without a verifiable handoff are refused.
+The tests transpile actual provider/DTO/callback/controller/V112 workflow modules with
+TypeScript and mock infrastructure/HTTP. They do not run a browser, database or Temporal server.
+
 <p align="center">
   <a href="https://postiz.com/" target="_blank">
   <picture>

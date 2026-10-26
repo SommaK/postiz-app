@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { ZernioProvider } from './social/zernio/zernio.provider';
 
 import { Injectable } from '@nestjs/common';
 import { XProvider } from '@gitroom/nestjs-libraries/integrations/social/x.provider';
@@ -40,6 +41,7 @@ import { MeweProvider } from '@gitroom/nestjs-libraries/integrations/social/mewe
 import { TumblrProvider } from '@gitroom/nestjs-libraries/integrations/social/tumblr.provider';
 
 export const socialIntegrationList: Array<SocialAbstract & SocialProvider> = [
+  new ZernioProvider(),
   new XProvider(),
   new LinkedinProvider(),
   new LinkedinPageProvider(),

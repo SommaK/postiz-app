@@ -177,6 +177,7 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
                           </div>
                           <div className="w-[1px] h-[20px] bg-blockSeparator mobile:hidden" />
                           <LanguageComponent />
+                          <a href="https://github.com/SommaK/postiz-app" target="_blank" rel="noreferrer">Source code</a>
                           <div className="contents mobile:hidden">
                             <ChromeExtensionComponent />
                           </div>

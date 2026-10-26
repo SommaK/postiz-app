@@ -1,4 +1,5 @@
 import { RedditSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/reddit.dto';
+import { ZernioDto } from '../../../integrations/social/zernio/zernio.dto';
 import { PinterestSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/pinterest.dto';
 import { YoutubeSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/youtube.settings.dto';
 import { TikTokDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
@@ -28,6 +29,7 @@ import { TumblrDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settin
 
 export type ProviderExtension<T extends string, M> = { __type: T } & M;
 export type AllProvidersSettings =
+  | ProviderExtension<'zernio', ZernioDto>
   | ProviderExtension<'reddit', RedditSettingsDto>
   | ProviderExtension<'lemmy', LemmySettingsDto>
   | ProviderExtension<'youtube', YoutubeSettingsDto>
@@ -68,6 +70,7 @@ type None = NonNullable<unknown>;
 
 export const allProviders = (setEmpty?: any) => {
   return [
+    { value: ZernioDto, name: 'zernio' },
     { value: RedditSettingsDto, name: 'reddit' },
     { value: LemmySettingsDto, name: 'lemmy' },
     { value: YoutubeSettingsDto, name: 'youtube' },
