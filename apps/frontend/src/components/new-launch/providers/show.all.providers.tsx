@@ -1,4 +1,5 @@
 'use client';
+import ZernioProvider from './zernio/zernio.provider';
 
 import DevtoProvider from '@gitroom/frontend/components/new-launch/providers/devto/devto.provider';
 import XProvider from '@gitroom/frontend/components/new-launch/providers/x/x.provider';
@@ -42,6 +43,7 @@ import MeweProvider from '@gitroom/frontend/components/new-launch/providers/mewe
 import TumblrProvider from '@gitroom/frontend/components/new-launch/providers/tumblr/tumblr.provider';
 
 export const Providers = [
+  { identifier: 'zernio', component: ZernioProvider },
   {
     identifier: 'devto',
     component: DevtoProvider,
